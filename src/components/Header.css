@@ -1,0 +1,30 @@
+.header {
+    background-color: rgb(68, 65, 65);
+    color: lightgrey;
+}
+
+.navbar-brand {
+    font-size: 1.6rem;
+}
+
+.nav-item {
+    padding-top: 8px;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+}
+
+.sitename {
+    color:white;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 300;
+    
+}
+.sitename span {
+    color: #d9534f!important;
+    font-weight: 700;
+}
+
+li {
+    color: white;
+    
+}
