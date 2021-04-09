@@ -4,9 +4,8 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
-import InputGroup from "react-bootstrap/InputGroup";
 import Button from "react-bootstrap/Button";
-// import Label from "react-bootstrap/FormLabel";
+import Cocktail from "../components/Beverages/Cocktail";
 
 import "./HomeCocktailName.css";
 
@@ -15,16 +14,16 @@ const HomeCocktailName = () => {
     const [cocktail, setCocktail] = useState('');
     const [allCocktails, setAllCocktails] = useState([]);
 
-    const getDrinksByName = async (cocktail) => {
-        // Search by name
-        const apiResponse = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${cocktail}`);
-        // Returns a json respone
-        const cocktails = await apiResponse.json();
-
-        return null
+    const fetchDrinksByName = async (e) => {
+        e.preventDefault();
+        const response = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${cocktail}`);
+        const data = await response.json();
+        setAllCocktails(data.drinks);
    }
 
-
+   const mappedCocktails = allCocktails.map(cocktail => (
+       <Cocktail key={cocktail.idDrink} cocktail={cocktail}/>
+   ))
     return (
         <div>
             <Container className="mt-5">
@@ -36,15 +35,15 @@ const HomeCocktailName = () => {
                                 <Form>
                                     <Form.Group>
                                         <Form.Label>Cocktail Name:</Form.Label>
-                                        <input value={cocktail} onChange={e => setCocktail(e.target.value)}type="text" placeholder="Eg. Margarita" className="form-control" />
+                                        <input value={cocktail} onChange={e => setCocktail(e.target.value)} type="text" placeholder="Eg. Margarita" className="form-control" />
                                     </Form.Group>
                                     <Form.Group>
-                                        <Button className="btn btn-success d-block" onClick={getDrinksByName}>Get Cocktails</Button>
+                                        <Button className="btn btn-success d-block" onClick={fetchDrinksByName}>Get Cocktails</Button>
                                     </Form.Group>
                                 </Form>
                             </Col>
                         </Row>
-
+                    {mappedCocktails}
                     </Jumbotron>
                 </Row>
             </Container>
