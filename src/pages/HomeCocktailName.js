@@ -21,7 +21,7 @@ const HomeCocktailName = () => {
         setAllCocktails(data.drinks);
    }
 
-   const mappedCocktails = allCocktails.map(cocktail => (
+   const mappedCocktails = allCocktails?.map(cocktail => (
        <Cocktail key={cocktail.idDrink} cocktail={cocktail}/>
    ))
     return (
@@ -43,7 +43,13 @@ const HomeCocktailName = () => {
                                 </Form>
                             </Col>
                         </Row>
-                    {mappedCocktails}
+                        <div className="results">
+                            {mappedCocktails.length !== 0 ? <h1 className="text-center mt-5">Results</h1> : null }
+                            <Row className="mt-5">
+                                {mappedCocktails}
+                            </Row>
+                        </div>
+                    
                     </Jumbotron>
                 </Row>
             </Container>

@@ -1,55 +1,45 @@
 import React from 'react'
 import Card from "react-bootstrap/Card";
+import Col from "react-bootstrap/Col";
 import ListGroup from "react-bootstrap/ListGroup";
-import ListGroupItem from "react-bootstrap/ListGroupItem";
+import { getIngredients } from "../../Utilities/Utilities";
 
 const Cocktail = ({cocktail}) => {
 
-    const getIngredients = () => {
-        
-        let ingredients = [];
-        for(let i = 1; i < 16; i++) {
-            const ingredientMeasure = {};
-            if( cocktail[`strIngredient${i}`] !== null ) {
-                ingredientMeasure.ingredient = cocktail[`strIngredient${i}`];
-                ingredientMeasure.measure = cocktail[`strMeasure${i}`];
-                ingredients.push(ingredientMeasure);
-            }
-        }
-        return ingredients;
-    }
+    let lesIngredients = getIngredients(cocktail).map((ingredient, index) => (
+        <ListGroup.Item key={index}>{ingredient.ingredient} {ingredient.measure}</ListGroup.Item>
+    ));
 
-
+ // ne pas mettre de listGroupItem dans des Card.text
 
     return (
         <>
-            <Card style={{ width: '18rem' }}>
-                <Card.Img src={cocktail.strDrinkThumb} variant="top"/>
-                <Card.Body>
-                    <Card.Title className="text-center">{cocktail.strDrink}</Card.Title>
-                    <Card.Text className="text-center">Instructions</Card.Text>
-                    <Card.Text>{cocktail.strInstructions}</Card.Text>
-                    <Card.Text>
+            <Col md="6" >
+                <Card style={{ width: '18rem' }} className="my-3 mx-auto">
+                    <Card.Img src={cocktail.strDrinkThumb} variant="top"/>
+                    <Card.Body>
+                        <Card.Title className="text-center">{cocktail.strDrink}</Card.Title>
+                        <Card.Text className="text-center">Instructions</Card.Text>
+                        <Card.Text>{cocktail.strInstructions}</Card.Text>
                         <ListGroup>
-                            <ListGroupItem variant="danger">
+                            <ListGroup.Item variant="danger">
                                 les ingredients
-                            </ListGroupItem>
+                            </ListGroup.Item>
+                            {lesIngredients}
                         </ListGroup>
-                    </Card.Text>
-                    <Card.Text>Extra Information</Card.Text>
-                    <Card.Text>
-                        <span className="badge badge-pill badge-success">
-                            {cocktail.strAlcoholic}
-                        </span>
-                        <span className="badge badge-pill badge-warning">
-                            {cocktail.strCategory}
-                        </span>
-                    </Card.Text>
-                
+                        <Card.Text>Extra Information</Card.Text>
+                        <Card.Text>
+                            <span className="badge badge-pill badge-success">
+                                {cocktail.strAlcoholic}
+                            </span>
+                            <span className="badge badge-pill badge-warning">
+                                Category: {cocktail.strCategory}
+                            </span>
+                        </Card.Text>
+                    </Card.Body>
+                </Card>
+            </Col>
 
-                </Card.Body>
-                
-            </Card>
         </>
     )
 }
