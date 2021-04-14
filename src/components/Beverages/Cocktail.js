@@ -5,13 +5,13 @@ import ListGroup from "react-bootstrap/ListGroup";
 import { getIngredients } from "../../Utilities/Utilities";
 
 const Cocktail = ({cocktail}) => {
-
+    
     let lesIngredients = getIngredients(cocktail).map((ingredient, index) => (
         <ListGroup.Item key={index}>{ingredient.ingredient} {ingredient.measure}</ListGroup.Item>
     ));
 
  // ne pas mettre de listGroupItem dans des Card.text
-
+    //console.log("cocktail dans home: ", cocktail);
     return (
         <>
             <Col md="6" >

@@ -3,12 +3,11 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Jumbotron from "react-bootstrap/Jumbotron";
-import FormGroup from "react-bootstrap/FormGroup";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import { getIngredients } from '../Utilities/Utilities';
+//import { getIngredients } from '../Utilities/Utilities';
 import Drink from "../components/Beverages/Drink";
-import MyModal from "../components/MyModal";
+//import MyModal from "../components/MyModal";
 
 const Ingredient = () => {
 
