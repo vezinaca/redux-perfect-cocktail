@@ -40,7 +40,7 @@ const Drink = ({drink}) => {
     //console.log("full cocktail details ici: ", fullDetailsCocktail);
     return (
         <>
-            <Col className="col-md-6">
+            <Col className="col-md-4">
                 <Card className="my-3">
                     <Card.Img src={drink.strDrinkThumb} />
                     <Card.Body>

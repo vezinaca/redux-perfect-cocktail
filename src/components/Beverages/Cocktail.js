@@ -10,7 +10,7 @@ const Cocktail = ({cocktail}) => {
         <ListGroup.Item key={index}>{ingredient.ingredient} {ingredient.measure}</ListGroup.Item>
     ));
 
- // ne pas mettre de listGroupItem dans des Card.text
+    // ne pas mettre de listGroupItem dans des Card.text
     //console.log("cocktail dans home: ", cocktail);
     return (
         <>
