@@ -12,10 +12,18 @@ const Cocktail = ({cocktail}) => {
 
     // ne pas mettre de listGroupItem dans des Card.text
     //console.log("cocktail dans home: ", cocktail);
+
+    const handleClick = () => {
+        console.log('click');
+    }
+    
     return (
         <>
             <Col md="6" >
                 <Card style={{ width: '18rem' }} className="my-3 mx-auto">
+                    <button className="favorite-btn btn btn-outline-info" onClick={handleClick}>
+                        +
+                    </button>
                     <Card.Img src={cocktail.strDrinkThumb} variant="top"/>
                     <Card.Body>
                         <Card.Title className="text-center">{cocktail.strDrink}</Card.Title>
@@ -23,7 +31,7 @@ const Cocktail = ({cocktail}) => {
                         <Card.Text>{cocktail.strInstructions}</Card.Text>
                         <ListGroup>
                             <ListGroup.Item variant="danger">
-                                les ingredients
+                                Ingredients
                             </ListGroup.Item>
                             {lesIngredients}
                         </ListGroup>

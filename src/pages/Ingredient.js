@@ -19,7 +19,7 @@ const Ingredient = () => {
         const res = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${ingredient}`);
         const data = await res.json();
         setDrinks(data.drinks);
-        console.log(data.drinks);
+        //console.log(data.drinks);
     }
 
     const allDrinks = drinks?.map(drink => (

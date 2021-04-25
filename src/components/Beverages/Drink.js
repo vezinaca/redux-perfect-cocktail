@@ -5,12 +5,14 @@ import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import { getIngredients } from "../../Utilities/Utilities";
 import ListGroup from "react-bootstrap/ListGroup";
+import "./Drink.css";
 
 
 const Drink = ({drink}) => {
 
     const [show, setShow] = useState(false);
     const [fullDetailsCocktail, setFullDetailsCocktails] = useState([]);
+    const [ingredients, setIngredients] = useState([]);
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -20,14 +22,14 @@ const Drink = ({drink}) => {
     const fetchCocktailDetailsById = async () => {
         const res = await fetch (`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${drink.idDrink}`);
         const data = await res.json();
-        console.log("dans fetchcocktail data.drinks: ", data.drinks);
-        setFullDetailsCocktails(data.drinks);
+        //console.log("dans fetchcocktailDetailsByID dans Drink data.drinks: ", data.drinks[0]);
+        setFullDetailsCocktails(data.drinks[0]);
         // console.log("full cocktail details: ", fullDetailsCocktail);
         //console.log("full cocktail ingredients: ", getIngredients(fullDetailsCocktail) )
-        
-        lesIngredients = await getIngredients(data.drinks).map((ingredient, index) => (
-            <ListGroup.Item key={index}>{ingredient.ingredient} {ingredient.measure}</ListGroup.Item>
-        ));
+        setIngredients(getIngredients(data.drinks[0]));
+        // lesIngredients = await getIngredients(data.drinks[0]).map((ingredient, index) => (
+        //     <ListGroup.Item key={index}>{ingredient.ingredient} {ingredient.measure}</ListGroup.Item>
+        // ));
     }
 
     useEffect (() => {
@@ -37,11 +39,19 @@ const Drink = ({drink}) => {
         // ));
     }, [])
 
-    //console.log("full cocktail details ici: ", fullDetailsCocktail);
+    //console.log("full cocktail details ici: ", fullDetailsCocktail.strInstructions);
+    console.log("les ingredients: ", ingredients);
+
+    const handleClick = () => {
+        console.log('click fav');
+    }
     return (
         <>
             <Col className="col-md-4">
                 <Card className="my-3">
+                    <button onClick={handleClick} className="favorite-btn btn btn-outline-info">
+                        +
+                    </button>
                     <Card.Img src={drink.strDrinkThumb} />
                     <Card.Body>
                         <Card.Title className="text-center">{drink.strDrink}</Card.Title>
@@ -57,7 +67,13 @@ const Drink = ({drink}) => {
                 </Modal.Header>
                 <Modal.Body>
                     <ListGroup>
-                        {lesIngredients}
+                        <ListGroup.Item variant="success">Preparation</ListGroup.Item>
+                        <ListGroup.Item>{fullDetailsCocktail.strInstructions}</ListGroup.Item>
+                        <ListGroup.Item variant="success">Ingredients</ListGroup.Item>
+                        {ingredients?.map((ingredient, index) =>(
+                            <ListGroup.Item key={index}>{ingredient.ingredient} - {ingredient.measure}</ListGroup.Item>
+                        ) )}
+                       
                     </ListGroup>
                 </Modal.Body>
                 <Modal.Footer>
