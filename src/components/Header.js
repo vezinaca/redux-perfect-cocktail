@@ -26,7 +26,7 @@ const Header = () => {
                                 <Nav.Link as={Link} to="/category"><li className="nav-item">Category</li></Nav.Link>
                             </Nav.Item>
                             <Nav.Item>
-                                <Nav.Link as={Link} to="/alcoholic"><li className="nav-item">Alcohol/non alcohol</li></Nav.Link>
+                                <Nav.Link as={Link} to="/alcohol"><li className="nav-item">Alcohol/non alcohol</li></Nav.Link>
                             </Nav.Item>  
                         </ul>
                         <Nav.Item>
