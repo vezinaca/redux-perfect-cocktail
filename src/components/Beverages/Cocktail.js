@@ -4,7 +4,12 @@ import Col from "react-bootstrap/Col";
 import ListGroup from "react-bootstrap/ListGroup";
 import { getIngredients } from "../../Utilities/Utilities";
 
+import { useDispatch } from "react-redux";
+import { addToFavorites, removeFromFavorites } from "../../features/favorites/favoriteSlice";
+
 const Cocktail = ({cocktail}) => {
+
+    const dispatch = useDispatch();
     
     let lesIngredients = getIngredients(cocktail).map((ingredient, index) => (
         <ListGroup.Item key={index}>{ingredient.ingredient} {ingredient.measure}</ListGroup.Item>
@@ -14,7 +19,8 @@ const Cocktail = ({cocktail}) => {
     //console.log("cocktail dans home: ", cocktail);
 
     const handleClick = () => {
-        console.log('click');
+        console.log('click favs cocktail');
+        dispatch(addToFavorites(cocktail));
     }
     
     return (

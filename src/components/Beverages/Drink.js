@@ -7,12 +7,19 @@ import { getIngredients } from "../../Utilities/Utilities";
 import ListGroup from "react-bootstrap/ListGroup";
 import "./Drink.css";
 
+import { useDispatch } from "react-redux";
+import { addToFavorites, removeFromFavorites } from "../../features/favorites/favoriteSlice";
+
 
 const Drink = ({drink}) => {
 
     const [show, setShow] = useState(false);
     const [fullDetailsCocktail, setFullDetailsCocktails] = useState([]);
     const [ingredients, setIngredients] = useState([]);
+
+    //const favorites = useSelector(selectFavorites);
+    const dispatch = useDispatch();
+    
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -40,10 +47,11 @@ const Drink = ({drink}) => {
     }, [])
 
     //console.log("full cocktail details ici: ", fullDetailsCocktail.strInstructions);
-    console.log("les ingredients: ", ingredients);
+    //console.log("les ingredients: ", ingredients);
 
     const handleClick = () => {
         console.log('click fav');
+        dispatch(addToFavorites(drink));
     }
     return (
         <>
