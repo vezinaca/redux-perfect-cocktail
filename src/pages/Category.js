@@ -4,7 +4,7 @@ import Col from "react-bootstrap/Col";
 import Jumbotron from "react-bootstrap/Jumbotron";
 import Form from "react-bootstrap/Form";
 import Container from "react-bootstrap/Container";
-import Button from "react-bootstrap/Button";
+// import Button from "react-bootstrap/Button";
 import Drink from "../components/Beverages/Drink";
 
 import "./Category.css";

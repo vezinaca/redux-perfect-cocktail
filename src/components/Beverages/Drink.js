@@ -24,7 +24,7 @@ const Drink = ({drink}) => {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
-    let lesIngredients;   
+    // let lesIngredients;   
 
     const fetchCocktailDetailsById = async () => {
         const res = await fetch (`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${drink.idDrink}`);

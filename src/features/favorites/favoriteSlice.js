@@ -15,8 +15,11 @@ export const favoritesSlice = createSlice({
             // return { favorites: updatedFavorites, done: false};
         },
         removeFromFavorites: (state, action) => {
+            console.log("action.payload: ", action.payload);
+
             state.favorites.filter(favorite => favorite.idDrink !== action.payload)
             //updatedFavorites = state.favorites.filter(favorite => favorite.idDrink !== action.payload)
+            //const index = state.favorites.indexOf
         },
     }
 })
