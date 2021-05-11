@@ -19,21 +19,27 @@ const Favorites = () => {
 
     const [show, setShow] = useState(false);
     const [fullDetailsCocktail, setFullDetailsCocktails] = useState([]);
-    const favorites = useSelector (selectFavorites)
+    const favorites = useSelector(selectFavorites)
     const dispatch = useDispatch();
     const [ingredients, setIngredients] = useState([]);
+
+    console.log('dans favorites page');
     
     
     const handleClose = () => setShow(false);
+
     const handleShow = (e) => {
         e.preventDefault();
+        console.log('dans le handleShow: ', e.target.value);
         fetchCocktailDetailsById(e.target.value);
         
         setShow(true);
     }
 
     const handleRemove = (e) => {
+        console.log('dans handleRemove: ', e.target.value);
         dispatch(removeFromFavorites(e.target.value))
+        console.log('apres le dispatch dans handleRemove de favorites');
     }
 
     const fetchCocktailDetailsById = async (id) => {
@@ -42,7 +48,7 @@ const Favorites = () => {
         setFullDetailsCocktails(data.drinks[0]);
         setIngredients(getIngredients(data.drinks[0]));
     }
-    const allFavs = favorites.map(favorite => (
+    const allFavs = favorites?.map(favorite => (
         <tr key={favorite.idDrink}>
             <td><img src={favorite.strDrinkThumb} width="80px"alt="problem"/></td>
             <td>{favorite.strDrink}</td>

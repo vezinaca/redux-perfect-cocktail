@@ -44,7 +44,7 @@ const Drink = ({drink}) => {
         // lesIngredients = getIngredients(fullDetailsCocktail).map((ingredient, index) => (
         //     <ListGroup.Item key={index}>{ingredient.ingredient} {ingredient.measure}</ListGroup.Item>
         // ));
-    }, [])
+    }, [] )
 
     //console.log("full cocktail details ici: ", fullDetailsCocktail.strInstructions);
     //console.log("les ingredients: ", ingredients);

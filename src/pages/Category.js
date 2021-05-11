@@ -17,14 +17,14 @@ const Category = () => {
     const fetchCategories = async () => {
         const res = await fetch('https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list');
         const data = await res.json();
-        console.log("data: ", data.drinks);   
+        //console.log("data: ", data.drinks);   
         setCategories(data.drinks);
     }
 
     const fetchDrinksByCategories = async (category) => {
         const res = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=${category}`);
         const data = await res.json();
-        console.log(data.drinks);
+        //console.log(data.drinks);
         setDrinks(data.drinks);
 
     }
