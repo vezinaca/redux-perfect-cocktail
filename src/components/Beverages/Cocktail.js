@@ -11,7 +11,18 @@ const Cocktail = ({cocktail}) => {
 
     const dispatch = useDispatch();
     const favorites = useSelector(selectFavorites)
-    
+    let isFav;
+    let isFavSymbol = '+'; 
+
+    favorites.forEach(favorite => {
+        if (cocktail.idDrink === favorite.idDrink){
+            isFavSymbol = '-';
+            isFav = true;
+            return;
+        }
+    })
+
+
     let lesIngredients = getIngredients(cocktail).map((ingredient, index) => (
         <ListGroup.Item key={index}>{ingredient.ingredient} {ingredient.measure}</ListGroup.Item>
     ));
@@ -21,15 +32,25 @@ const Cocktail = ({cocktail}) => {
 
     const handleClick = () => {
         console.log('click favs cocktail');
-        dispatch(addToFavorites(cocktail));
+        if (!isFav){
+            dispatch(addToFavorites(cocktail));
+        }
+        else {
+            dispatch(removeFromFavorites(cocktail.idDrink))
+        }
+        
     }
+
+    
+
+    
     
     return (
         <>
             <Col md="6" >
                 <Card style={{ width: '18rem' }} className="my-3 mx-auto">
                     <button className="favorite-btn btn btn-outline-info" onClick={handleClick}>
-                        +
+                        {isFavSymbol}
                     </button>
                     <Card.Img src={cocktail.strDrinkThumb} variant="top"/>
                     <Card.Body>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import Jumbotron from "react-bootstrap/Jumbotron";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
@@ -13,6 +13,7 @@ const HomeCocktailName = () => {
 
     const [cocktail, setCocktail] = useState('');
     const [allCocktails, setAllCocktails] = useState([]);
+    const theCocktail = useRef(1);
 
     const fetchDrinksByName = async (e) => {
         e.preventDefault();
@@ -24,6 +25,14 @@ const HomeCocktailName = () => {
    const mappedCocktails = allCocktails?.map(cocktail => (
        <Cocktail key={cocktail.idDrink} cocktail={cocktail}/>
    ))
+
+   useEffect(() => {
+       theCocktail.current = theCocktail.current + 1;
+   })
+
+   console.log('rendered homecocktail');
+   //theCocktail = cocktail;
+   console.log('thecocktail ref: ', theCocktail.current);
     return (
         <div>
             <Container className="mt-5">

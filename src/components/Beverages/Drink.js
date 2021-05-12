@@ -7,8 +7,8 @@ import { getIngredients } from "../../Utilities/Utilities";
 import ListGroup from "react-bootstrap/ListGroup";
 import "./Drink.css";
 
-import { useDispatch } from "react-redux";
-import { addToFavorites, removeFromFavorites } from "../../features/favorites/favoriteSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { addToFavorites, removeFromFavorites, selectFavorites } from "../../features/favorites/favoriteSlice";
 
 
 const Drink = ({drink}) => {
@@ -16,16 +16,23 @@ const Drink = ({drink}) => {
     const [show, setShow] = useState(false);
     const [fullDetailsCocktail, setFullDetailsCocktails] = useState([]);
     const [ingredients, setIngredients] = useState([]);
-
-    //const favorites = useSelector(selectFavorites);
-    const dispatch = useDispatch();
     
+    const dispatch = useDispatch();
+    const favorites = useSelector(selectFavorites)
+    let isFav;
+    let isFavSymbol = '+';
+
+    favorites.forEach(favorite => {
+        if (drink.idDrink === favorite.idDrink){
+            isFavSymbol = '-';
+            isFav = true;
+            return;
+        }
+    })    
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-
-    // let lesIngredients;   
-
+     
     const fetchCocktailDetailsById = async () => {
         const res = await fetch (`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${drink.idDrink}`);
         const data = await res.json();
@@ -51,14 +58,21 @@ const Drink = ({drink}) => {
 
     const handleClick = () => {
         console.log('click fav');
-        dispatch(addToFavorites(drink));
+        //dispatch(addToFavorites(drink));
+
+        if (!isFav){
+            dispatch(addToFavorites(drink));
+        }
+        else {
+            dispatch(removeFromFavorites(drink.idDrink))
+        }
     }
     return (
         <>
             <Col className="col-md-4">
                 <Card className="my-3">
                     <button onClick={handleClick} className="favorite-btn btn btn-outline-info">
-                        +
+                        {isFavSymbol}
                     </button>
                     <Card.Img src={drink.strDrinkThumb} />
                     <Card.Body>
