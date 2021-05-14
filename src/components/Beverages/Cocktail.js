@@ -22,7 +22,6 @@ const Cocktail = ({cocktail}) => {
         }
     })
 
-
     let lesIngredients = getIngredients(cocktail).map((ingredient, index) => (
         <ListGroup.Item key={index}>{ingredient.ingredient} {ingredient.measure}</ListGroup.Item>
     ));

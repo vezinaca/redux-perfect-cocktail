@@ -7,12 +7,16 @@ import Container from "react-bootstrap/Container";
 // import Button from "react-bootstrap/Button";
 import Drink from "../components/Beverages/Drink";
 
+import { useHistory } from "react-router-dom";
+
 import "./Category.css";
 
 const Category = () => {
 
     const [categories, setCategories] = useState([]);
     const [drinks, setDrinks] = useState([]);
+
+    const history = useHistory();
 
     const fetchCategories = async () => {
         const res = await fetch('https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list');
@@ -29,6 +33,7 @@ const Category = () => {
 
     }
 
+    console.log('history: ', history.location);
     
     useEffect(() => {
         fetchCategories();

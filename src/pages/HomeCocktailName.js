@@ -7,31 +7,82 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Cocktail from "../components/Beverages/Cocktail";
 
+import { useHistory, useLocation } from "react-router-dom";
+
+import { useSelector } from "react-redux";
+//import { selectSearch } from "../features/search/searchSlice";
+
 import "./HomeCocktailName.css";
+
+const setStorage = (search) => {
+    localStorage.setItem('search', search);
+}
 
 const HomeCocktailName = () => {
 
-    const [cocktail, setCocktail] = useState('');
+    const [cocktailQuery, setCocktailQuery] = useState('');
     const [allCocktails, setAllCocktails] = useState([]);
     const theCocktail = useRef(1);
+    const history = useHistory()
+
+    const location = useLocation();
+
+    //const thisCocktail = useSelector(selectSearch);
 
     const fetchDrinksByName = async (e) => {
         e.preventDefault();
-        const response = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${cocktail}`);
+        setStorage(cocktailQuery);
+        const response = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${cocktailQuery}`);
         const data = await response.json();
         setAllCocktails(data.drinks);
    }
+
+   const fetchDrinksByNameOnLoad = async (search) => {
+    //e.preventDefault();
+    //setStorage(cocktailQuery);
+    const response = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${search}`);
+    const data = await response.json();
+    setAllCocktails(data.drinks);
+}
 
    const mappedCocktails = allCocktails?.map(cocktail => (
        <Cocktail key={cocktail.idDrink} cocktail={cocktail}/>
    ))
 
-   useEffect(() => {
-       theCocktail.current = theCocktail.current + 1;
-   })
+//    useEffect(() => {
+//        theCocktail.current = theCocktail.current + 1;
+//        const params = new URLSearchParams()
+//         if (cocktailQuery) {
+//             params.append('s', cocktailQuery)
+//         } else {
+//             params.delete('s')
+//         }
+//         history.push({ search: params.toString() })
+        
+    
+//     },[cocktailQuery, history])
+
+    useEffect(() => {
+        console.log('useEffect homecocktailname')
+        let searchTerm = localStorage.getItem('search');
+        if (searchTerm !== null){
+            fetchDrinksByNameOnLoad(searchTerm)
+
+        }
+
+    },[])
+
+    const handleClick = (e) => {
+        e.preventDefault();
+
+    }
 
    console.log('rendered homecocktail');
+   console.log('location in HomeCocktail: ', location.search);
    //theCocktail = cocktail;
+   console.log('history: ', history.location);
+   console.log("cocktail query: ", cocktailQuery);
+   
    console.log('thecocktail ref: ', theCocktail.current);
     return (
         <div>
@@ -44,7 +95,7 @@ const HomeCocktailName = () => {
                                 <Form>
                                     <Form.Group>
                                         <Form.Label>Cocktail Name:</Form.Label>
-                                        <input value={cocktail} onChange={e => setCocktail(e.target.value)} type="text" placeholder="Eg. Margarita" className="form-control" />
+                                        <input value={cocktailQuery} onChange={e => setCocktailQuery(e.target.value)} type="text" placeholder="Eg. Margarita" className="form-control" />
                                     </Form.Group>
                                     <Form.Group>
                                         <Button className="btn btn-success d-block" onClick={fetchDrinksByName}>Get Cocktails</Button>
