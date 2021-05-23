@@ -67,7 +67,6 @@ const HomeCocktailName = () => {
         let searchTerm = localStorage.getItem('search');
         if (searchTerm !== null){
             fetchDrinksByNameOnLoad(searchTerm)
-
         }
 
     },[])

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -9,14 +9,27 @@ import Button from "react-bootstrap/Button";
 import Drink from "../components/Beverages/Drink";
 //import MyModal from "../components/MyModal";
 
+const setStorage = (ingredient) => {
+    localStorage.setItem('ingredient', ingredient);
+}
+
 const Ingredient = () => {
 
     const [ingredient, setIngredient] = useState('');
     const [drinks, setDrinks] = useState([]);
 
-    const getDrinks = async () => {
+    const fetchDrinks = async () => {
 
+        setStorage(ingredient);
         const res = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${ingredient}`);
+        const data = await res.json();
+        setDrinks(data.drinks);
+        //console.log(data.drinks);
+    }
+
+    const fetchDrinksOnLoad = async (search) => {
+
+        const res = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${search}`);
         const data = await res.json();
         setDrinks(data.drinks);
         //console.log(data.drinks);
@@ -25,6 +38,15 @@ const Ingredient = () => {
     const allDrinks = drinks?.map(drink => (
         <Drink key={drink.idDrink} drink={drink} />
     ))  
+
+    useEffect(() => {
+        console.log('useEffect Ingredient')
+        let searchTerm = localStorage.getItem('ingredient');
+        if (searchTerm !== null){
+            fetchDrinksOnLoad(searchTerm)
+        }
+
+    }, [])
     
     return (
         <>
@@ -46,7 +68,7 @@ const Ingredient = () => {
                                         />
                                     </Form.Group>
                                     <Form.Group>
-                                        <Button variant="success" onClick={getDrinks}>Get Cocktail</Button>
+                                        <Button variant="success" onClick={fetchDrinks}>Get Cocktail</Button>
                                     </Form.Group>
                                 </Form>                                
                             </Col>

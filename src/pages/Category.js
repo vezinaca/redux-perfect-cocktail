@@ -11,6 +11,10 @@ import { useHistory } from "react-router-dom";
 
 import "./Category.css";
 
+const setStorage = (category) => {
+    localStorage.setItem('category', category);
+}
+
 const Category = () => {
 
     const [categories, setCategories] = useState([]);
@@ -26,22 +30,31 @@ const Category = () => {
     }
 
     const fetchDrinksByCategories = async (category) => {
+        setStorage(category);
         const res = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=${category}`);
         const data = await res.json();
         //console.log(data.drinks);
         setDrinks(data.drinks);
+    }
 
+    const fetchDrinksByCategoriesOnLoad = async (category) => {
+        const res = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=${category}`);
+        const data = await res.json();
+        //console.log(data.drinks);
+        setDrinks(data.drinks);
     }
 
     console.log('history: ', history.location);
     
     useEffect(() => {
         fetchCategories();
-    }, [])
+        console.log('useEffect categories')
+        let searchTerm = localStorage.getItem('category');
+        if (searchTerm !== null){
+            fetchDrinksByCategoriesOnLoad(searchTerm)
+        }
 
-    // useEffect(() => {
-    //     fetchDrinksByCategories
-    // })
+    }, [])
 
     return (
         <>
@@ -54,7 +67,7 @@ const Category = () => {
                             <Form>
                                 <Form.Group>
                                     <Form.Label>
-                                        Ingredient: 
+                                        Category: 
                                     </Form.Label>
                                     <Form.Control as="select" onChange={(evt) => fetchDrinksByCategories(evt.target.value)}>
                                         <option> - Select - </option>
