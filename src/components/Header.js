@@ -15,7 +15,7 @@ const Header = () => {
                 <Container>
                 <ul className="navbar-nav mr-auto">
                             <Nav.Item>
-                                <Nav.Link as={Link} to="/"><li><h4 className="sitename">PERFECT<span>COCKTAIL</span></h4></li></Nav.Link>
+                                <Nav.Link as={Link} to="/"><li><h4 className="sitename">PERFECT REDUX<span>COCKTAIL</span></h4></li></Nav.Link>
                             </Nav.Item>
                             <Nav.Item>
                                 <Nav.Link as={Link} to="/"><li className="nav-item">Cocktail Name</li></Nav.Link>
