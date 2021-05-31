@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.css": "/vezinaca/redux-perfect-cocktail/static/css/main.2129897a.chunk.css",
+    "main.js": "/vezinaca/redux-perfect-cocktail/static/js/main.830635d5.chunk.js",
+    "main.js.map": "/vezinaca/redux-perfect-cocktail/static/js/main.830635d5.chunk.js.map",
+    "runtime-main.js": "/vezinaca/redux-perfect-cocktail/static/js/runtime-main.344a41d6.js",
+    "runtime-main.js.map": "/vezinaca/redux-perfect-cocktail/static/js/runtime-main.344a41d6.js.map",
+    "static/js/2.203cfcf3.chunk.js": "/vezinaca/redux-perfect-cocktail/static/js/2.203cfcf3.chunk.js",
+    "static/js/2.203cfcf3.chunk.js.map": "/vezinaca/redux-perfect-cocktail/static/js/2.203cfcf3.chunk.js.map",
+    "index.html": "/vezinaca/redux-perfect-cocktail/index.html",
+    "static/css/main.2129897a.chunk.css.map": "/vezinaca/redux-perfect-cocktail/static/css/main.2129897a.chunk.css.map",
+    "static/js/2.203cfcf3.chunk.js.LICENSE.txt": "/vezinaca/redux-perfect-cocktail/static/js/2.203cfcf3.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.344a41d6.js",
+    "static/js/2.203cfcf3.chunk.js",
+    "static/css/main.2129897a.chunk.css",
+    "static/js/main.830635d5.chunk.js"
+  ]
+}
