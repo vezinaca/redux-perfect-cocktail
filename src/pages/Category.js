@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Jumbotron from "react-bootstrap/Jumbotron";
@@ -19,39 +19,40 @@ const Category = () => {
 
     const [categories, setCategories] = useState([]);
     const [drinks, setDrinks] = useState([]);
+    const [category, setCategory] = useState([]);
+    const selectRef = useRef();
 
     const history = useHistory();
 
     const fetchCategories = async () => {
         const res = await fetch('https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list');
         const data = await res.json();
-        //console.log("data: ", data.drinks);   
         setCategories(data.drinks);
     }
 
     const fetchDrinksByCategories = async (category) => {
         setStorage(category);
+        setCategory(category);
         const res = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=${category}`);
         const data = await res.json();
-        //console.log(data.drinks);
+        console.log("category dans fetchDrinkByCategory: ", category);
         setDrinks(data.drinks);
     }
 
     const fetchDrinksByCategoriesOnLoad = async (category) => {
         const res = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=${category}`);
         const data = await res.json();
-        //console.log(data.drinks);
         setDrinks(data.drinks);
     }
-
-    console.log('history: ', history.location);
-    
+        
     useEffect(() => {
-        fetchCategories();
-        console.log('useEffect categories')
-        let searchTerm = localStorage.getItem('category');
-        if (searchTerm !== null){
-            fetchDrinksByCategoriesOnLoad(searchTerm)
+        fetchCategories();        
+        let searchCategory = localStorage.getItem('category');
+        console.log('useEffect categories searchTerm', searchCategory );
+        
+        if (searchCategory !== null){
+            setCategory(searchCategory);
+            fetchDrinksByCategoriesOnLoad(searchCategory);
         }
 
     }, [])
@@ -69,11 +70,11 @@ const Category = () => {
                                     <Form.Label>
                                         Category: 
                                     </Form.Label>
-                                    <Form.Control as="select" onChange={(evt) => fetchDrinksByCategories(evt.target.value)}>
+                                    <Form.Control value={category} ref={selectRef} className="categorySelect" as="select" onChange={(evt) => fetchDrinksByCategories(evt.target.value)}>
                                         <option> - Select - </option>
                                         {
                                             categories.map((category, index) => (
-                                                <option key={index}>{category.strCategory}</option>
+                                                <option value ={category.strCategory} key={index}>{category.strCategory}</option>
                                             ))
                                         }
                                     </Form.Control>

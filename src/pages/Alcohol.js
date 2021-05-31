@@ -13,12 +13,14 @@ const setStorage = (alcoholic) => {
 const Alcohol = () => {
 
     const [drinks, setDrinks] = useState([]);
+    const [categoryAlcohol, setCategoryAlcohol] = useState([]);
 
     const fetchDrinksByAlcohol = async (term) => {
         
         const res = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?a=${term}`);
         const data = await res.json();
         setDrinks(data.drinks);
+        setCategoryAlcohol(term);
 
     }
 
@@ -31,11 +33,19 @@ const Alcohol = () => {
     }
 
     const handleChange = e => {
-        console.log("handleChange");
         fetchDrinksByAlcohol(e.target.value);
-        console.log("e.target.value: ", e.target.value);
+        setCategoryAlcohol(e.target.value);
         setStorage(e.target.value);
     }
+
+    useEffect (() => {
+        let alcoholic = localStorage.getItem('alcoholic');
+        if (alcoholic !== null){
+            fetchDrinksByAlcoholOnLoad(alcoholic);
+            setCategoryAlcohol(alcoholic);
+        }
+
+    },[])
 
     return (
         <>
@@ -47,7 +57,7 @@ const Alcohol = () => {
                             <Col className="col-12">
                                 <Form>
                                     <Form.Group>
-                                        <Form.Control as="select" onChange={handleChange}>
+                                        <Form.Control value={categoryAlcohol} as="select" onChange={handleChange}>
                                             <option value="none">- Select -</option>
                                             <option value="Alcoholic">Alcoholic</option>
                                             <option value="Non_Alcoholic">Non Alcoholic</option>

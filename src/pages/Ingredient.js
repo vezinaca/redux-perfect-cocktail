@@ -23,16 +23,14 @@ const Ingredient = () => {
         setStorage(ingredient);
         const res = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${ingredient}`);
         const data = await res.json();
-        setDrinks(data.drinks);
-        //console.log(data.drinks);
+        setDrinks(data.drinks);        
     }
 
     const fetchDrinksOnLoad = async (search) => {
 
         const res = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${search}`);
         const data = await res.json();
-        setDrinks(data.drinks);
-        //console.log(data.drinks);
+        setDrinks(data.drinks);        
     }
 
     const allDrinks = drinks?.map(drink => (
@@ -44,6 +42,7 @@ const Ingredient = () => {
         let searchTerm = localStorage.getItem('ingredient');
         if (searchTerm !== null){
             fetchDrinksOnLoad(searchTerm)
+            setIngredient(searchTerm);
         }
 
     }, [])

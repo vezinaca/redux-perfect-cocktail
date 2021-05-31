@@ -22,12 +22,8 @@ const HomeCocktailName = () => {
 
     const [cocktailQuery, setCocktailQuery] = useState('');
     const [allCocktails, setAllCocktails] = useState([]);
-    const theCocktail = useRef(1);
-    const history = useHistory()
-
+    const history = useHistory();
     const location = useLocation();
-
-    //const thisCocktail = useSelector(selectSearch);
 
     const fetchDrinksByName = async (e) => {
         e.preventDefault();
@@ -38,8 +34,7 @@ const HomeCocktailName = () => {
    }
 
    const fetchDrinksByNameOnLoad = async (search) => {
-    //e.preventDefault();
-    //setStorage(cocktailQuery);
+    
     const response = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${search}`);
     const data = await response.json();
     setAllCocktails(data.drinks);
@@ -49,24 +44,12 @@ const HomeCocktailName = () => {
        <Cocktail key={cocktail.idDrink} cocktail={cocktail}/>
    ))
 
-//    useEffect(() => {
-//        theCocktail.current = theCocktail.current + 1;
-//        const params = new URLSearchParams()
-//         if (cocktailQuery) {
-//             params.append('s', cocktailQuery)
-//         } else {
-//             params.delete('s')
-//         }
-//         history.push({ search: params.toString() })
-        
-    
-//     },[cocktailQuery, history])
-
     useEffect(() => {
         console.log('useEffect homecocktailname')
         let searchTerm = localStorage.getItem('search');
         if (searchTerm !== null){
-            fetchDrinksByNameOnLoad(searchTerm)
+            fetchDrinksByNameOnLoad(searchTerm);
+            setCocktailQuery(searchTerm);            
         }
 
     },[])
@@ -78,11 +61,10 @@ const HomeCocktailName = () => {
 
    console.log('rendered homecocktail');
    console.log('location in HomeCocktail: ', location.search);
-   //theCocktail = cocktail;
    console.log('history: ', history.location);
    console.log("cocktail query: ", cocktailQuery);
    
-   console.log('thecocktail ref: ', theCocktail.current);
+   
     return (
         <div>
             <Container className="mt-5">
