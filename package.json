@@ -1,5 +1,5 @@
 {
-  "homepage": "https://github.com/vezinaca/redux-perfect-cocktail",
+  "homepage": "https://github.com.io/vezinaca/redux-perfect-cocktail",
   "name": "redux-perfect-cocktail",
   "version": "0.1.0",
   "private": true,
@@ -17,12 +17,13 @@
     "react-scripts": "4.0.3"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "eject": "react-scripts eject"
+    
   },
   "eslintConfig": {
     "extends": "react-app"
