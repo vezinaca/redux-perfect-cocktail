@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState} from 'react'
 import Col from "react-bootstrap/Col";
 import Card from "react-bootstrap/Card";
 import Modal from "react-bootstrap/Modal";
@@ -31,19 +31,18 @@ const Drink = ({drink}) => {
     })    
 
     const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+    
+    const handleShow = () => {
+        setShow(true);
+        fetchCocktailDetailsById(); 
+    }
      
     const fetchCocktailDetailsById = async () => {
         const res = await fetch (`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${drink.idDrink}`);
         const data = await res.json();
         setFullDetailsCocktails(data.drinks[0]);
-        setIngredients(getIngredients(data.drinks[0]));
-        
+        setIngredients(getIngredients(data.drinks[0]));        
     }
-
-    useEffect (() => {
-        fetchCocktailDetailsById();        
-    },[])
     
     const handleClick = () => {
                 

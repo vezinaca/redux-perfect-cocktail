@@ -30,7 +30,7 @@ const Cocktail = ({cocktail}) => {
     //console.log("cocktail dans home: ", cocktail);
 
     const handleClick = () => {
-        console.log('click favs cocktail');
+        
         if (!isFav){
             dispatch(addToFavorites(cocktail));
         }
@@ -38,11 +38,7 @@ const Cocktail = ({cocktail}) => {
             dispatch(removeFromFavorites(cocktail.idDrink))
         }
         
-    }
-
-    
-
-    
+    }    
     
     return (
         <>
