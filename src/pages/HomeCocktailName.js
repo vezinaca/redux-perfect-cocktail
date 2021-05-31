@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import Jumbotron from "react-bootstrap/Jumbotron";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
@@ -6,11 +6,6 @@ import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Cocktail from "../components/Beverages/Cocktail";
-
-import { useHistory, useLocation } from "react-router-dom";
-
-import { useSelector } from "react-redux";
-//import { selectSearch } from "../features/search/searchSlice";
 
 import "./HomeCocktailName.css";
 
@@ -22,9 +17,7 @@ const HomeCocktailName = () => {
 
     const [cocktailQuery, setCocktailQuery] = useState('');
     const [allCocktails, setAllCocktails] = useState([]);
-    const history = useHistory();
-    const location = useLocation();
-
+    
     const fetchDrinksByName = async (e) => {
         e.preventDefault();
         setStorage(cocktailQuery);
@@ -45,7 +38,7 @@ const HomeCocktailName = () => {
    ))
 
     useEffect(() => {
-        console.log('useEffect homecocktailname')
+        //console.log('useEffect homecocktailname')
         let searchTerm = localStorage.getItem('search');
         if (searchTerm !== null){
             fetchDrinksByNameOnLoad(searchTerm);
@@ -54,16 +47,7 @@ const HomeCocktailName = () => {
 
     },[])
 
-    const handleClick = (e) => {
-        e.preventDefault();
-
-    }
-
-   console.log('rendered homecocktail');
-   console.log('location in HomeCocktail: ', location.search);
-   console.log('history: ', history.location);
-   console.log("cocktail query: ", cocktailQuery);
-   
+    
    
     return (
         <div>

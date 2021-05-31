@@ -5,9 +5,7 @@ import Col from "react-bootstrap/Col";
 import Jumbotron from "react-bootstrap/Jumbotron";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-//import { getIngredients } from '../Utilities/Utilities';
 import Drink from "../components/Beverages/Drink";
-//import MyModal from "../components/MyModal";
 
 const setStorage = (ingredient) => {
     localStorage.setItem('ingredient', ingredient);
@@ -38,7 +36,6 @@ const Ingredient = () => {
     ))  
 
     useEffect(() => {
-        console.log('useEffect Ingredient')
         let searchTerm = localStorage.getItem('ingredient');
         if (searchTerm !== null){
             fetchDrinksOnLoad(searchTerm)

@@ -4,11 +4,7 @@ import Col from "react-bootstrap/Col";
 import Jumbotron from "react-bootstrap/Jumbotron";
 import Form from "react-bootstrap/Form";
 import Container from "react-bootstrap/Container";
-// import Button from "react-bootstrap/Button";
 import Drink from "../components/Beverages/Drink";
-
-import { useHistory } from "react-router-dom";
-
 import "./Category.css";
 
 const setStorage = (category) => {
@@ -19,11 +15,9 @@ const Category = () => {
 
     const [categories, setCategories] = useState([]);
     const [drinks, setDrinks] = useState([]);
-    const [category, setCategory] = useState([]);
+    const [category, setCategory] = useState('');
     const selectRef = useRef();
-
-    const history = useHistory();
-
+    
     const fetchCategories = async () => {
         const res = await fetch('https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list');
         const data = await res.json();
@@ -35,7 +29,6 @@ const Category = () => {
         setCategory(category);
         const res = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=${category}`);
         const data = await res.json();
-        console.log("category dans fetchDrinkByCategory: ", category);
         setDrinks(data.drinks);
     }
 
@@ -48,7 +41,6 @@ const Category = () => {
     useEffect(() => {
         fetchCategories();        
         let searchCategory = localStorage.getItem('category');
-        console.log('useEffect categories searchTerm', searchCategory );
         
         if (searchCategory !== null){
             setCategory(searchCategory);
@@ -94,7 +86,6 @@ const Category = () => {
                     </Jumbotron>
                 </Row>
             </Container>
-            
         </>
     )
 }

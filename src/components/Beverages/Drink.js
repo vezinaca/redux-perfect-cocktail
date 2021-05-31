@@ -36,30 +36,17 @@ const Drink = ({drink}) => {
     const fetchCocktailDetailsById = async () => {
         const res = await fetch (`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${drink.idDrink}`);
         const data = await res.json();
-        //console.log("dans fetchcocktailDetailsByID dans Drink data.drinks: ", data.drinks[0]);
         setFullDetailsCocktails(data.drinks[0]);
-        // console.log("full cocktail details: ", fullDetailsCocktail);
-        //console.log("full cocktail ingredients: ", getIngredients(fullDetailsCocktail) )
         setIngredients(getIngredients(data.drinks[0]));
-        // lesIngredients = await getIngredients(data.drinks[0]).map((ingredient, index) => (
-        //     <ListGroup.Item key={index}>{ingredient.ingredient} {ingredient.measure}</ListGroup.Item>
-        // ));
+        
     }
 
     useEffect (() => {
-        fetchCocktailDetailsById();
-        // lesIngredients = getIngredients(fullDetailsCocktail).map((ingredient, index) => (
-        //     <ListGroup.Item key={index}>{ingredient.ingredient} {ingredient.measure}</ListGroup.Item>
-        // ));
-    }, [] )
-
-    //console.log("full cocktail details ici: ", fullDetailsCocktail.strInstructions);
-    //console.log("les ingredients: ", ingredients);
-
+        fetchCocktailDetailsById();        
+    },[])
+    
     const handleClick = () => {
-        console.log('click fav');
-        //dispatch(addToFavorites(drink));
-
+                
         if (!isFav){
             dispatch(addToFavorites(drink));
         }

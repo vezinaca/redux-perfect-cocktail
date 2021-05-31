@@ -14,7 +14,6 @@ import { useSelector, useDispatch } from "react-redux";
 
 import { removeFromFavorites, selectFavorites } from "../features/favorites/favoriteSlice";
 
-//export default
 const Favorites = () => {
 
     const [show, setShow] = useState(false);
@@ -22,24 +21,17 @@ const Favorites = () => {
     const favorites = useSelector(selectFavorites)
     const dispatch = useDispatch();
     const [ingredients, setIngredients] = useState([]);
-
-    console.log('dans favorites page');
-    
     
     const handleClose = () => setShow(false);
 
     const handleShow = (e) => {
-        e.preventDefault();
-        console.log('dans le handleShow: ', e.target.value);
-        fetchCocktailDetailsById(e.target.value);
-        
+        e.preventDefault();        
+        fetchCocktailDetailsById(e.target.value);        
         setShow(true);
     }
 
-    const handleRemove = (e) => {
-        console.log('dans handleRemove: ', e.target.value);
+    const handleRemove = (e) => {        
         dispatch(removeFromFavorites(e.target.value))
-        console.log('apres le dispatch dans handleRemove de favorites');
     }
 
     const fetchCocktailDetailsById = async (id) => {
@@ -73,8 +65,7 @@ const Favorites = () => {
                                             <th scope="col">View</th>
                                             <th scope="col">Remove</th>
                                         </tr>
-                                    </thead>
-                                        
+                                    </thead>                                        
                                     <tbody>
                                         {allFavs}
                                     </tbody>
@@ -82,10 +73,7 @@ const Favorites = () => {
                                 </Table>
                             </Col>
                         </Row>
-
-
                     </Jumbotron>
-
                 </Row>
             </Container>
 

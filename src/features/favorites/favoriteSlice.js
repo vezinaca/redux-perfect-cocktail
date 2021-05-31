@@ -22,23 +22,14 @@ export const favoritesSlice = createSlice({
             
             let indexToRemove; 
             state.favorites.forEach((favorite, index) => {
-                console.log(" avant favorite.idDrink: ", favorite.idDrink)
                 if (favorite.idDrink === action.payload){
-                    console.log('oui meme trouve');
                     indexToRemove = index;
-                    console.log(index);
-                    console.log('autre test');
                 }
-                else {
-                    console.log("pas trouve");
-                }
+                
             });
             
             state.favorites.splice(indexToRemove,1);
-
             setStorage(state.favorites);
-
-            //state.favorites.filter(favorite => favorite.idDrink !== action.payload)
             
         },
     }

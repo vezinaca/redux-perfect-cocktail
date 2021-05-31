@@ -13,7 +13,7 @@ const setStorage = (alcoholic) => {
 const Alcohol = () => {
 
     const [drinks, setDrinks] = useState([]);
-    const [categoryAlcohol, setCategoryAlcohol] = useState([]);
+    const [categoryAlcohol, setCategoryAlcohol] = useState('');
 
     const fetchDrinksByAlcohol = async (term) => {
         

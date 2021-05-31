@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "./Header.css";
 
 import Button from "react-bootstrap/Button"
@@ -7,10 +7,6 @@ import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 
 const Header = () => {
-
-    const location = useLocation();
-    console.log("location: ", location.search);
-
 
     return (
         <>
